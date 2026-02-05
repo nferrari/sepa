@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import datetime
-import sepa19
+from . import sepa19
 
 
 DEFAULT_CURRENCY = 'EUR'
