@@ -21,11 +21,14 @@ creditor_name = 'YOUR COMPANY NAME'
 creditor_iban = 'FR123456789012345678901234'
 creditor_bic = 'SWIFTCODE'
 creditor_identifier = 'FR12ZZZ123456'
+presenter_identifier = creditor_identifier
 
 # Instantiate the message
 direct_debit_message = DirectDebitMessage(
     creditor_name,
     'REF1234', # Reference of your choice
+    creditor_bic,
+    presenter_identifier
 )
 
 # Add a FRST transactions batch
@@ -35,7 +38,8 @@ batch = direct_debit_message.add_batch(
     creditor_name,
     creditor_iban,
     creditor_bic,
-    creditor_identifier)
+    creditor_identifier,
+    datetime.date('2016', '02', '29'))
 
 # Debtor information
 debtor_name = 'John Doe'
@@ -50,7 +54,8 @@ operation = batch.add_operation(
     datetime.date('2014', '04', '30'),
     debtor_name,
     debtor_bic,
-    debtor_iban)
+    debtor_iban,
+    remittance_description="Concept")
 
 # Display the XML message
 print direct_debit_message.get_xml()
